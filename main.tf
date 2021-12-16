@@ -376,7 +376,7 @@ resource "aws_security_group_rule" "cluster_admin_egress" {
 resource "aws_security_group_rule" "cluster_admin_ingress" {
 	type = "ingress"
 	security_group_id = "${aws_security_group.cluster_admin.id}"
-	cidr_blocks = ["${compact(concat(list(format("%s/32", data.external.ifconfig_co.result.public_ip)), var.cluster_admin_cidr))}"]
+	cidr_blocks = ["${compact(concat(to_list([format("%s/32", data.external.ifconfig_co.result.public_ip)]), var.cluster_admin_cidr))}"]
 	from_port = "${element(var.admin_ports, count.index)}"
 	to_port = "${element(var.admin_ports, count.index)}"
 	protocol = "tcp"
@@ -404,7 +404,7 @@ resource "aws_security_group_rule" "cluster_user_egress" {
 resource "aws_security_group_rule" "cluster_user_ingress" {
 	type = "ingress"
 	security_group_id = "${aws_security_group.cluster_user.id}"
-	cidr_blocks = ["${compact(concat(list(format("%s/32", data.external.ifconfig_co.result.public_ip)), var.cluster_user_cidr))}"]
+	cidr_blocks = ["${compact(concat(to_list([format("%s/32", data.external.ifconfig_co.result.public_ip)]), var.cluster_user_cidr))}"]
 	from_port = "${element(var.user_ports, count.index)}"
 	to_port = "${element(var.user_ports, count.index)}"
 	protocol = "tcp"
