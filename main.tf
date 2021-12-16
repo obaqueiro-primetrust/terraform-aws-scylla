@@ -74,9 +74,9 @@ resource "aws_instance" "monitor" {
 	tags = "${merge(local.aws_tags, map("type", "monitor"))}"
 
 	depends_on = [
-		"aws_security_group.cluster",
-		"aws_security_group.cluster_admin",
-		"aws_security_group.cluster_user"
+		aws_security_group.cluster,
+		aws_security_group.cluster_admin,
+		aws_security_group.cluster_user
 	]
 }
 
@@ -150,7 +150,7 @@ resource "null_resource" "scylla_start" {
 	}
 
 	count = "${var.cluster_count}"
-	depends_on = ["null_resource.scylla"]
+	depends_on = [null_resource.scylla]
 }
 
 resource "null_resource" "scylla_schema" {
@@ -173,7 +173,7 @@ resource "null_resource" "scylla_schema" {
 		]
 	}
 
-	depends_on = ["null_resource.scylla_start"]
+	depends_on = [null_resource.scylla_start]
 }
 
 resource "null_resource" "monitor" {
@@ -222,7 +222,7 @@ resource "null_resource" "monitor" {
 		]
 	}
 
-	depends_on = ["null_resource.scylla_start"]
+	depends_on = [null_resource.scylla_start]
 }
 
 resource "aws_key_pair" "support" {
@@ -251,7 +251,7 @@ resource "aws_subnet" "subnet" {
 	tags = "${local.aws_tags}"
 
 	count = "${var.cluster_count}"
-	depends_on = ["aws_internet_gateway.vpc_igw"]
+	depends_on = [aws_internet_gateway.vpc_igw]
 }
 
 resource "aws_eip" "scylla" {
@@ -261,7 +261,7 @@ resource "aws_eip" "scylla" {
 	tags = "${merge(local.aws_tags, map("type", "scylla"))}"
 
 	count = "${var.cluster_count}"
-	depends_on = ["aws_internet_gateway.vpc_igw"]
+	depends_on = [aws_internet_gateway.vpc_igw]
 }
 
 resource "aws_eip" "monitor" {
@@ -270,7 +270,7 @@ resource "aws_eip" "monitor" {
 
 	tags = "${merge(local.aws_tags, map("type", "monitor"))}"
 
-	depends_on = ["aws_internet_gateway.vpc_igw"]
+	depends_on = [aws_internet_gateway.vpc_igw]
 }
 
 resource "aws_route_table" "public" {
