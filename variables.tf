@@ -45,11 +45,6 @@ variable "environment" {
 	default = "development"
 }
 
-variable "version" {
-	description = ""
-	default = "0.3.0"
-}
-
 variable "cql_user" {
 	description = ""
 	default = "scylla"
