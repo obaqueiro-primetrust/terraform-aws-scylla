@@ -8,7 +8,6 @@ locals {
 	aws_az = "${data.aws_availability_zones.all.names}"
 	aws_tags = {
 		environment = "${var.environment}"
-		version     = "${var.version}"
 		cluster_id	= "${random_uuid.cluster_id.result}"
 		keep        = "alive"
 	}
