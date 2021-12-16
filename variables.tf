@@ -182,7 +182,7 @@ variable "aws_ami_scylla" {
 
 variable "aws_ami_centos" {
 	description = ""
-	type = "map"
+	type = map(string)
 	default = {
 		"us-east-1" = "ami-4bf3d731"
 		"us-west-1" = "ami-65e0e305"
