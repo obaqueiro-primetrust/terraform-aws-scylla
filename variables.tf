@@ -152,7 +152,7 @@ variable "monitor_ports" {
 
 variable "aws_ami_monitor" {
 	description = ""
-	type = "map"
+	type = map(string)
 	default = {
 		"us-east-1" = "ami-04c172dadae705df1"
 		"us-west-1" = "ami-0a7a96e5da05a6a1a"
@@ -167,7 +167,7 @@ variable "cluster_scylla_version" {
 
 variable "aws_ami_scylla" {
 	description = ""
-	type = "map"
+	type = map(string)
 	default = {
 		"2.3.2_us-east-1" = "ami-0f4178bd33d6cfa48"
 		"2.3.2_us-west-1" = "ami-0a9db5299a5ee4409"
