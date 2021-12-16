@@ -48,9 +48,9 @@ resource "aws_instance" "scylla" {
 	count = "${var.cluster_count}"
 
 	depends_on = [
-		"aws_security_group.cluster",
-		"aws_security_group.cluster_admin",
-		"aws_security_group.cluster_user"
+		aws_security_group.cluster,
+		aws_security_group.cluster_admin,
+		aws_security_group.cluster_user
 	]
 }
 
