@@ -3,7 +3,7 @@ data "aws_availability_zones" "all" {}
 data "template_file" "provision_common_sh" {
 	template = "${file(format("%s/scripts/common.sh", path.module))}"
 
-	vars {
+	vars = {
 		public_keys = "${join("\n", var.public_keys)}"
 	}
 }
@@ -15,7 +15,7 @@ data "external" "ifconfig_co" {
 data "template_file" "provision_scylla_sh" {
 	template = "${file(format("%s/scripts/scylla.sh", path.module))}"
 
-	vars {
+	vars = {
 		ip = "${var.cluster_broadcast == "private" ? element(aws_instance.scylla.*.private_ip, count.index) : element(aws_eip.scylla.*.public_ip, count.index)}"
 		seeds = "${var.cluster_broadcast == "private" ? join(",", aws_instance.scylla.*.private_ip) : join(",", aws_eip.scylla.*.public_ip)}"
 		dc = "${var.aws_region}"
