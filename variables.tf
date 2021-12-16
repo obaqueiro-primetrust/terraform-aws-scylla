@@ -25,13 +25,13 @@ variable "cluster_count" {
 
 variable "cluster_admin_cidr" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = []
 }
 
 variable "cluster_user_cidr" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = []
 }
 
@@ -67,7 +67,7 @@ variable "system_auth_replication" {
 
 variable "scylla_args" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = [
 		"--clustername %s",
 		"--totalnodes 1",
@@ -77,7 +77,7 @@ variable "scylla_args" {
 
 variable "public_keys" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = []
 }
 
@@ -113,7 +113,7 @@ variable "monitor_alert_password" {
 
 variable "admin_ports" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = [
 		22,
 		3000,
@@ -125,7 +125,7 @@ variable "admin_ports" {
 
 variable "user_ports" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = [
 		9042,
 		9160
@@ -134,7 +134,7 @@ variable "user_ports" {
 
 variable "node_ports" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = [
 		7000,
 		7001
@@ -143,7 +143,7 @@ variable "node_ports" {
 
 variable "monitor_ports" {
 	description = ""
-	type = "list"
+	type = list(string)
 	default = [
 		9100,
 		9180
